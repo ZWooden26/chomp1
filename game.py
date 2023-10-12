@@ -1,3 +1,8 @@
 import pygame
-print('hello world')
-print('today is Wednesday')
+import sys
+
+pygame.init()
+width = 800
+height = 600
+
+
