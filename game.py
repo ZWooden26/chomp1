@@ -18,3 +18,5 @@ while running:
     screen.fill(BLUE)
     pygame.draw.rect(screen, BROWN, (0, 500, WIDTH, 100))
     pygame.display.flip()
+
+pygame.quit()
