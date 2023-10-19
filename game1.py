@@ -11,7 +11,9 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("CHOMP IMPROVED")
 
 #loading font
-my_font = pygame.font.Font('Assets/brainfish.ttf', 128)
+my_font = pygame.font.Font('Assets/brainfish.ttf', 100)
+font1 = pygame.font.Font('Assets/Branda.ttf', 64)
+font2 = pygame.font.Font('Assets/Debrosee.ttf', 64)
 
 def draw_background(screen):
     water = pygame.image.load("Assets/water.png").convert()
@@ -34,7 +36,11 @@ def draw_background(screen):
         screen.blit(seagrass, (x, y))
 
     text = my_font.render('CHOMP', True, (255, 29, 0))
-    screen.blit(text, ((WIDTH/2) - (text.get_width()/2), (100)))
+    screen.blit(text, ((WIDTH/2) - (text.get_width()/2), (50)))
+    text1 = font1.render('CHOMP', True, (255, 29, 0))
+    screen.blit(text1, ((WIDTH / 2) - (text1.get_width() / 2), (50 + text.get_height())))
+    text2 = font2.render('CHOMP', True, (255, 29, 0))
+    screen.blit(text2, ((WIDTH / 2) - (text2.get_width() / 2), (50 + text.get_height() + text1.get_height())))
 
 running = True
 background = screen.copy()
