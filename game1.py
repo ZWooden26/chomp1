@@ -33,8 +33,8 @@ def draw_background(screen):
         y = random.randint(400, (HEIGHT - tile_size))
         screen.blit(seagrass, (x, y))
 
-    text = my_font.Render('CHOMP', True, (255, 29, 0))
-    screen.blit(text, ((WIDTH/2), (HEIGHT/2))
+    text = my_font.render('CHOMP', True, (255, 29, 0))
+    screen.blit(text, ((WIDTH/2) - (text.get_width()/2), (100)))
 
 running = True
 background = screen.copy()
