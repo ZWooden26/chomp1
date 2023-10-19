@@ -42,9 +42,30 @@ def draw_background(screen):
     text2 = font2.render('CHOMP', True, (255, 29, 0))
     screen.blit(text2, ((WIDTH / 2) - (text2.get_width() / 2), (50 + text.get_height() + text1.get_height())))
 
+def draw_fish(screen):
+    #load the fish
+    puffer = pygame.image.load('Assets/puffer_fish.png').convert()
+    puffer.set_colorkey((0, 0, 0))
+    puffer_width = puffer.get_width()
+    puffer_height = puffer.get_height()
+    for _ in range(5):
+        x = random.randint(0 + puffer_width, WIDTH - puffer_width)
+        y = random.randint(0 + puffer_height, HEIGHT - puffer_height)
+        screen.blit(puffer, (x, y))
+
+    green = pygame.image.load('Assets/green_fish.png').convert()
+    green.set_colorkey((0, 0, 0))
+    green_width = green.get_width()
+    green_height = green.get_height()
+    for _ in range(5):
+        x = random.randint(0 + green_width, WIDTH - green_width)
+        y = random.randint(0 + green_height, HEIGHT - green_height)
+        screen.blit(green, (x, y))
+
 running = True
 background = screen.copy()
 draw_background(background)
+draw_fish(background)
 
 while running:
     for event in pygame.event.get():
