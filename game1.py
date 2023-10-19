@@ -10,6 +10,9 @@ tile_size = 64
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("CHOMP IMPROVED")
 
+#loading font
+my_font = pygame.font.Font('Assets/brainfish.ttf', 128)
+
 def draw_background(screen):
     water = pygame.image.load("Assets/water.png").convert()
     sand = pygame.image.load("Assets/sand.png").convert()
