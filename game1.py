@@ -50,7 +50,7 @@ def draw_fish(screen):
     puffer_height = puffer.get_height()
     for _ in range(5):
         x = random.randint(0 + puffer_width, WIDTH - puffer_width)
-        y = random.randint(0 + puffer_height, HEIGHT - puffer_height)
+        y = random.randint(0 + puffer_height, 400 - puffer_height)
         screen.blit(puffer, (x, y))
 
     green = pygame.image.load('Assets/green_fish.png').convert()
@@ -59,7 +59,7 @@ def draw_fish(screen):
     green_height = green.get_height()
     for _ in range(5):
         x = random.randint(0 + green_width, WIDTH - green_width)
-        y = random.randint(0 + green_height, HEIGHT - green_height)
+        y = random.randint(0 + green_height, 400 - green_height)
         flip_green = pygame.transform.flip(green, True, False)
         screen.blit(flip_green, (x, y))
 
