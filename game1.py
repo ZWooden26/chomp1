@@ -60,7 +60,9 @@ def draw_fish(screen):
     for _ in range(5):
         x = random.randint(0 + green_width, WIDTH - green_width)
         y = random.randint(0 + green_height, HEIGHT - green_height)
-        screen.blit(green, (x, y))
+        flip_green = pygame.transform.flip(green, True, False)
+        screen.blit(flip_green, (x, y))
+
 
 running = True
 background = screen.copy()
