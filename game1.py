@@ -2,6 +2,8 @@ import pygame
 import random
 import sys
 
+MIN_SPEED = 0.5
+MAX_SPEED = 3
 class Fish(pygame.sprite.Sprite):
     def __init__(self, name, x, y):
         super().__init__()
@@ -11,7 +13,13 @@ class Fish(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
+        self.speed = random.uniform(MIN_SPEED, MAX_SPEED)
         self.rect.center = (x, y)
+
+    def update(self):
+        self.x -= self.speed
+        self.rect.x = self.x
+
     def draw(self, screen):
         screen.blit(self.image, self.rect.center)
 
@@ -22,8 +30,11 @@ WIDTH = 800
 HEIGHT = 600
 tile_size = 64
 
+clock = pygame.time.Clock()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("CHOMP IMPROVED")
+green = 'Assets/green_fish.png'
+puffer = 'Assets/puffer_fish.png'
 
 #loading font
 my_font = pygame.font.Font('Assets/brainfish.ttf', 100)
@@ -57,16 +68,16 @@ def draw_background(screen):
     text2 = font2.render('CHOMP', True, (150, 50, 50))
     screen.blit(text2, ((WIDTH / 2) - (text2.get_width() / 2), (text.get_height() + text1.get_height() - 10)))
 
-def draw_fish(screen):
+#def draw_fish(screen):
     #load the fish
-    puffer = pygame.image.load('Assets/puffer_fish.png').convert()
-    puffer.set_colorkey((0, 0, 0))
-    puffer_width = puffer.get_width()
-    puffer_height = puffer.get_height()
-    for _ in range(random.randint(1,5)):
-        x = random.randint(0 + puffer_width, WIDTH - puffer_width)
-        y = random.randint(0 + puffer_height, 400 - puffer_height)
-        screen.blit(puffer, (x, y))
+    #puffer = pygame.image.load('Assets/puffer_fish.png').convert()
+    #puffer.set_colorkey((0, 0, 0))
+    #puffer_width = puffer.get_width()
+    #puffer_height = puffer.get_height()
+    #for _ in range(random.randint(1,5)):
+        #x = random.randint(0 + puffer_width, WIDTH - puffer_width)
+        #y = random.randint(0 + puffer_height, 400 - puffer_height)
+        #screen.blit(puffer, (x, y))
 
     #green = pygame.image.load('Assets/green_fish.png').convert()
     #green.set_colorkey((0, 0, 0))
@@ -77,21 +88,25 @@ def draw_fish(screen):
         #y = random.randint(0 + green_height, 400 - green_height)
         #flip_green = pygame.transform.flip(green, True, False)
         #screen.blit(flip_green, (x, y))
-# -----------------------------------------
+# ----------MAIN LOOP---------------------
 running = True
 background = screen.copy()
 draw_background(background)
 for _ in range(5):
-    fishes.add(Fish('Assets/green_fish.png', random.randint(tile_size,WIDTH - tile_size), random.randint(tile_size,400)))
-
-fishes.draw(background)
+    fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size,400)))
 
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
     screen.blit(background, (0, 0))
+    fishes.update()
+    for fish in fishes:
+        if fish.rect.x < -tile_size:
+            fishes.remove(fish)
+            fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size,400)))
+    fishes.draw(screen)
     pygame.display.flip()
+    clock.tick(60)
 
 pygame.quit()
