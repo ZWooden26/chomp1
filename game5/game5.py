@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-from fish import Fish, fishes, green, puffer
+from fish import Fish, fishes, green, Sean
 from background import draw_background
 from game_parameters import *
 from player import Player
@@ -27,7 +27,6 @@ for _ in range(5):
 
 while running:
     for event in pygame.event.get():
-        print(event)
         if event.type == pygame.QUIT:
             running = False
         # control player fish

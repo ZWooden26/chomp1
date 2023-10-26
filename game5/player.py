@@ -1,12 +1,13 @@
 import pygame
 from game_parameters import *
+from fish import Sean
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.x = x
         self.y = y
-        self.image = pygame.image.load('../Assets/orange_fish.png').convert()
+        self.image = pygame.image.load(Sean).convert()
         self.image.set_colorkey((0, 0, 0))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -34,7 +35,10 @@ class Player(pygame.sprite.Sprite):
         self.y += self.y_speed
         self.rect.x = self.x
         self.rect.y = self.y
-        # check if player went off-screen
+        if (self.rect.x < -tile_size) or (self.rect.x > WIDTH):
+            self.x = WIDTH/2
+        if (self.rect.y < -tile_size) or (self.rect.y > 400):
+            self.y = 200
 
     def draw(self, screen):
         screen.blit(self.image, self.rect.center)
