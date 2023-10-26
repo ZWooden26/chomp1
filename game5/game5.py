@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-from fish import Fish, fishes, green, Sean
+from fish import Fish, fishes, green, Sean_LR, Sean_UD
 from background import draw_background
 from game_parameters import *
 from player import Player

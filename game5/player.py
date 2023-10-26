@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.left_image = pygame.transform.flip(self.right_image, True, False)
         self.up_image = pygame.image.load(Sean_UD).convert()
         self.up_image.set_colorkey((0, 0, 0))
-        self.down_image = pygame.transform.flip(self.up_image, True, False)
+        self.down_image = pygame.transform.flip(self.up_image, False, True)
         self.image = self.up_image
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -45,7 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
         if (self.rect.x < -tile_size) or (self.rect.x > WIDTH):
-            self.x = WIDTH/2
+            self.x = 300
         if (self.rect.y < -tile_size) or (self.rect.y > 400):
             self.y = 200
 

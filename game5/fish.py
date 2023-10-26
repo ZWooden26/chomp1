@@ -5,7 +5,7 @@ from game_parameters import *
 pygame.init()
 green = '../Assets/green_fish.png'
 Sean_LR = '../Assets/SEAN.png'
-Sean_UD = 'Assets/SEAN - Copy.png'
+Sean_UD = '../Assets/SEAN - Copy.png'
 
 MIN_SPEED = 1
 MAX_SPEED = 3
