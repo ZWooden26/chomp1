@@ -23,6 +23,10 @@ while running:
                 print("up")
             if event.key == pygame.K_DOWN:
                 print("down")
+            if event.key == pygame.K_LEFT:
+                print("left")
+            if event.key == pygame.K_RIGHT:
+                print("right")
 
     screen.blit(background, (0, 0))
     pygame.display.flip()
