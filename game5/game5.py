@@ -4,6 +4,7 @@ import random
 from fish import Fish, fishes, green, puffer
 from background import draw_background
 from game_parameters import *
+from player import Player
 
 # initialize
 pygame.init()
@@ -12,36 +13,44 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Adding a player fish")
 clock = pygame.time.Clock()
 
+# orange player
+player = Player(WIDTH/2, HEIGHT/2)
+
+# ------- Main Loop -------
+running = True
+background = screen.copy()
+draw_background(background)
+
 # draw fish on screen
 for _ in range(5):
     fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size,400)))
 
-# orange player
-
-# ------- Main Loop -------
-running = True
 while running:
     for event in pygame.event.get():
+        print(event)
         if event.type == pygame.QUIT:
             running = False
+        # control player fish
+        player.stop()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                print("up")
+                player.move_up()
             if event.key == pygame.K_DOWN:
-                print("down")
+                player.move_down()
             if event.key == pygame.K_LEFT:
-                print("left")
+                player.move_left()
             if event.key == pygame.K_RIGHT:
-                print("right")
+                player.move_right()
 
+    screen.blit(background, (0, 0))
     fishes.update()
-
+    player.update()
     for fish in fishes:
         if fish.rect.x < -tile_size:
             fishes.remove(fish)
             fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size, 400)))
-
     fishes.draw(screen)
+    player.draw(screen)
     pygame.display.flip()
     clock.tick(60)
 
