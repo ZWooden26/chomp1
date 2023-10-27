@@ -10,7 +10,7 @@ from player import Player
 pygame.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Adding a player fish")
+pygame.display.set_caption("Chomp Game")
 clock = pygame.time.Clock()
 
 # orange player
