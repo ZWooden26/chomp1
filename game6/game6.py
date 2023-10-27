@@ -17,11 +17,11 @@ clock = pygame.time.Clock()
 player = Player(WIDTH/2, HEIGHT/2)
 
 # score
-score_font = pygame.font.Font('../Assets/Debrosee.ttf', 50)
+score_font = pygame.font.Font('../Assets/Branda.ttf', 25)
 score = 0
 
 # sounds
-
+oof = pygame.mixer.Sound('../Assets/hurt.wav')
 
 # ------- Main Loop -------
 running = True
@@ -55,6 +55,7 @@ while running:
     # collisions
     result = pygame.sprite.spritecollide(player, fishes, True)
     if result:
+        pygame.mixer.Sound.play(oof)
         for x in result:
             score += 1
         for _ in range(len(result)):
@@ -67,8 +68,9 @@ while running:
     fishes.draw(screen)
     player.draw(screen)
 
-    score_text = score_font.render(f"Score:{score}", True, (255, 0, 0))
-    screen.blit(score_text, ((WIDTH - score_text.get_width()), 10))
+    #score_text = score_font.render(f"Score:{score}", True, (255, 0, 0))
+    score_text = score_font.render(f"Score: {score}", True, (255, 0, 0))
+    screen.blit(score_text, (WIDTH - score_text.get_width() - 5, 10))
 
     pygame.display.flip()
     clock.tick(60)

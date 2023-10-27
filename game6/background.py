@@ -24,7 +24,7 @@ def draw_background(screen):
         screen.blit(seagrass, (x, y))
 
     my_font = pygame.font.Font('../Assets/brainfish.ttf', 100)
-    font1 = pygame.font.Font('../Assets/Branda.ttf', 64)
+    font1 = pygame.font.Font('../Assets/Debrosee.ttf', 64)
 
     text = my_font.render('CHOMP', True, (255, 0, 0))
     screen.blit(text, ((WIDTH/2) - (text.get_width()/2), 10))
