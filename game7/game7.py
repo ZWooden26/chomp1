@@ -2,7 +2,8 @@ import pygame
 import sys
 import random
 from fish import Fish, fishes, green
-from background import draw_background
+from enemy import Enemy, enemies, puffer
+from background import draw_background, add_fish, add_enemy
 from game_parameters import *
 from player import Player
 
@@ -29,8 +30,8 @@ background = screen.copy()
 draw_background(background)
 
 # draw fish on screen
-for _ in range(5):
-    fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size, 400)))
+add_fish(5)
+add_enemy(3)
 
 while running:
     for event in pygame.event.get():
@@ -52,6 +53,7 @@ while running:
 
     screen.blit(background, (0, 0))
     fishes.update()
+    enemies.update()
     player.update()
 
     # collisions
@@ -61,13 +63,30 @@ while running:
         for x in result:
             score += 1
         for _ in range(len(result)):
-            fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size, 400)))
+            add_fish(1)
+
+    hit = pygame.sprite.spritecollide(player, enemies, True)
+    if hit:
+        if score < 5:
+            score = 0
+        else:
+            for x in hit:
+                score -= 5
+                add_enemy(1)
+            for _ in range(len(hit)):
+                add_enemy(1)
 
     for fish in fishes:
         if fish.rect.x < -tile_size:
             fishes.remove(fish)
             fishes.add(Fish(green, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size, 400)))
+    for enemy in enemies:
+        if enemy.rect.x < -tile_size:
+            enemies.remove(enemy)
+            enemies.add(Fish(puffer, random.randint(WIDTH, WIDTH + tile_size), random.randint(tile_size, 400)))
+
     fishes.draw(screen)
+    enemies.draw(screen)
     player.draw(screen)
 
     score_text = score_font.render(f"Score: {score}", True, (255, 0, 0))
